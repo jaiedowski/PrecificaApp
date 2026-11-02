@@ -9,9 +9,11 @@ App web responsivo (PWA) que ajuda artesãs iniciantes a precificar produtos com
 ## 2. Usuárias e acesso
 
 - Login com conta Google.
-- Uma planilha por negócio. Mãe e irmã compartilham a mesma planilha (mesmos insumos, receitas e produtos); a dona a compartilha com a conta Google da outra.
-- A planilha é criada automaticamente no primeiro acesso, a partir de um modelo. As usuárias não precisam abri-la.
-- Futuro: cada nova usuária/negócio ganha a sua própria planilha.
+- Uma planilha por negócio. Mãe e irmã compartilham a mesma planilha (mesmos insumos, receitas e produtos).
+- **Preparação pela administradora (v1.1):** a administradora cria a planilha pelo app ("Preparar planilha para outra pessoa"), que nasce com as configurações e categorias padrão. Ela compartilha a planilha com o e-mail Google da cliente (Editora) e envia um **link de acesso** (`site/#s=<id da planilha>`).
+- **Entrada da cliente:** ao abrir o link, a cliente só faz login com o Google e cai direto na planilha dela, sem escolher nem colar nada. O id fica lembrado no navegador. Sem acesso à planilha, o app explica que o e-mail precisa ser liberado.
+- Enquanto o app estiver em modo teste no Google, o e-mail de cada cliente também precisa constar em *Usuários de teste* (limite de 100). Para crescer além disso, será preciso a verificação do app pelo Google ou outra arquitetura (servidor próprio).
+- Futuro: painel de administração com lista de clientes, revogação de acesso e compartilhamento automático.
 
 ## 3. Requisitos funcionais
 

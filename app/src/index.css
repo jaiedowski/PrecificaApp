@@ -113,3 +113,6 @@ details { margin-top: .5rem; }
 .rodape a, button.link { color: var(--cor); }
 button.link { background: none; padding: 0; font-weight: 400; text-decoration: underline; }
 .porta .ou { color: var(--suave); font-size: .9rem; margin: .5rem 0 0; }
+
+.passos { padding-left: 1.2rem; display: flex; flex-direction: column; gap: .75rem; }
+.passos input { margin: .4rem 0; }
