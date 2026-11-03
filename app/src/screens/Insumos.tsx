@@ -4,7 +4,7 @@ import type { Insumo } from '../core/types'
 import { unidadeBase } from '../core/units'
 import { brl, novoId } from '../lib/format'
 import { comCategoria, useDados } from '../store'
-import { Campo, Modal, NumInput, SelectUnidade, Vazio } from '../ui'
+import { Campo, Modal, NumInput, SelectCategoria, SelectUnidade, Vazio } from '../ui'
 
 export default function Insumos() {
   const { dados, atualizar } = useDados()
@@ -95,9 +95,8 @@ function FormInsumo({ inicial, existe, categorias, onSalvar, onExcluir, onClose 
   return (
     <Modal titulo={existe ? 'Editar insumo' : 'Novo insumo'} onClose={onClose}>
       <Campo label="Nome"><input autoFocus value={i.nome} onChange={(e) => set({ nome: e.target.value })} placeholder="Ex.: Cera de soja" /></Campo>
-      <Campo label="Categoria" ajuda="Escolha uma da lista ou digite uma nova.">
-        <input list="cats-insumo" value={i.categoria} onChange={(e) => set({ categoria: e.target.value })} />
-        <datalist id="cats-insumo">{categorias.map((c) => <option key={c} value={c} />)}</datalist>
+      <Campo label="Categoria">
+        <SelectCategoria value={i.categoria} opcoes={categorias} onChange={(categoria) => set({ categoria })} />
       </Campo>
       <div className="duas">
         <Campo label="Quantidade na embalagem"><NumInput value={i.qtdEmbalagem || undefined} onChange={(n) => set({ qtdEmbalagem: n ?? 0 })} placeholder="Ex.: 1" /></Campo>

@@ -85,6 +85,52 @@ export function SelectUnidade({ value, onChange, como }: {
   )
 }
 
+const NOVA_CATEGORIA = '__nova__'
+
+/** Lista de seleção de categoria (igual às demais); a última opção permite criar uma nova. */
+export function SelectCategoria({ value, opcoes, onChange }: {
+  value: string
+  opcoes: string[]
+  onChange: (nome: string) => void
+}) {
+  const [criando, setCriando] = useState(false)
+  const [novo, setNovo] = useState('')
+  const lista = value && !opcoes.includes(value) ? [...opcoes, value] : opcoes
+
+  const confirmar = () => {
+    if (!novo.trim()) return
+    onChange(novo.trim())
+    setNovo('')
+    setCriando(false)
+  }
+
+  if (criando) {
+    return (
+      <div className="linha-nova">
+        <input
+          autoFocus
+          value={novo}
+          placeholder="Nome da nova categoria"
+          onChange={(e) => setNovo(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') { e.preventDefault(); confirmar() }
+            if (e.key === 'Escape') setCriando(false)
+          }}
+        />
+        <button type="button" className="sec" disabled={!novo.trim()} onClick={confirmar}>Adicionar</button>
+        <button type="button" className="icone" aria-label="Cancelar" onClick={() => setCriando(false)}>✕</button>
+      </div>
+    )
+  }
+  return (
+    <select value={value} onChange={(e) => (e.target.value === NOVA_CATEGORIA ? setCriando(true) : onChange(e.target.value))}>
+      <option value="">Escolha a categoria…</option>
+      {lista.map((c) => <option key={c} value={c}>{c}</option>)}
+      <option value={NOVA_CATEGORIA}>+ Nova categoria…</option>
+    </select>
+  )
+}
+
 /** Linha "insumo + quantidade + unidade", usada em receitas e em extras de produtos. */
 export function LinhaInsumo({ insumos, insumoId, quantidade, unidade, onChange, onRemove }: {
   insumos: Insumo[]

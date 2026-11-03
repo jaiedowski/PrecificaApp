@@ -8,7 +8,7 @@ import { mesmaDimensao } from '../core/units'
 import { brl, mensagemDeErro, novoId, pct } from '../lib/format'
 import type { Dados } from '../sheets/schema'
 import { comCategoria, useDados } from '../store'
-import { Campo, LinhaInsumo, Modal, NumInput, PctInput, Vazio } from '../ui'
+import { Campo, LinhaInsumo, Modal, NumInput, PctInput, SelectCategoria, Vazio } from '../ui'
 
 type Calculo = { ok: true; custo: CustoProduto; sugerido: number } | { ok: false; erro: string }
 
@@ -119,8 +119,11 @@ function FormProduto({ inicial, existe, onSalvar, onExcluir, onClose }: {
     <Modal titulo={existe ? 'Editar produto' : 'Novo produto'} onClose={onClose}>
       <Campo label="Nome"><input autoFocus value={p.nome} onChange={(e) => set({ nome: e.target.value })} placeholder="Ex.: Vela Lavanda 200 g" /></Campo>
       <Campo label="Categoria">
-        <input list="cats-produto" value={p.categoria} onChange={(e) => set({ categoria: e.target.value })} />
-        <datalist id="cats-produto">{dados.categorias.filter((c) => c.tipo === 'produto').map((c) => <option key={c.id} value={c.nome} />)}</datalist>
+        <SelectCategoria
+          value={p.categoria}
+          opcoes={dados.categorias.filter((c) => c.tipo === 'produto').map((c) => c.nome)}
+          onChange={(categoria) => set({ categoria })}
+        />
       </Campo>
 
       <Campo label="Receita">

@@ -116,3 +116,5 @@ button.link { background: none; padding: 0; font-weight: 400; text-decoration: u
 
 .passos { padding-left: 1.2rem; display: flex; flex-direction: column; gap: .75rem; }
 .passos input { margin: .4rem 0; }
+
+.linha-nova { display: grid; grid-template-columns: 1fr auto auto; gap: .4rem; align-items: center; }

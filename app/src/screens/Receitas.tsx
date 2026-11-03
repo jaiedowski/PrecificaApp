@@ -3,7 +3,7 @@ import { custoReceita, valorHora } from '../core/pricing'
 import type { Receita, ReceitaItem } from '../core/types'
 import { brl, mensagemDeErro, novoId } from '../lib/format'
 import { comCategoria, useDados } from '../store'
-import { Campo, LinhaInsumo, Modal, NumInput, SelectUnidade, Vazio } from '../ui'
+import { Campo, LinhaInsumo, Modal, NumInput, SelectCategoria, SelectUnidade, Vazio } from '../ui'
 
 export default function Receitas() {
   const { dados, mapaInsumos, atualizar } = useDados()
@@ -96,8 +96,11 @@ function FormReceita({ inicial, existe, onSalvar, onExcluir, onClose }: {
     <Modal titulo={existe ? 'Editar receita' : 'Nova receita'} onClose={onClose}>
       <Campo label="Nome"><input autoFocus value={r.nome} onChange={(e) => set({ nome: e.target.value })} placeholder="Ex.: Vela de soja 200 g" /></Campo>
       <Campo label="Categoria">
-        <input list="cats-receita" value={r.categoria} onChange={(e) => set({ categoria: e.target.value })} />
-        <datalist id="cats-receita">{dados.categorias.filter((c) => c.tipo === 'receita').map((c) => <option key={c.id} value={c.nome} />)}</datalist>
+        <SelectCategoria
+          value={r.categoria}
+          opcoes={dados.categorias.filter((c) => c.tipo === 'receita').map((c) => c.nome)}
+          onChange={(categoria) => set({ categoria })}
+        />
       </Campo>
 
       <div className="duas">
